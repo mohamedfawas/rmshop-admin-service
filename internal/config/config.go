@@ -23,21 +23,21 @@ func LoadConfig() (*Config, error) {
 	cfg := &Config{}
 
 	// Server config
-	cfg.Server.Host = getEnv("SERVER_HOST", "0.0.0.0")
-	cfg.Server.Port = getEnv("SERVER_PORT", "50052")
+	cfg.Server.Host = getEnvOrDefault("SERVER_HOST", "0.0.0.0")
+	cfg.Server.Port = getEnvOrDefault("SERVER_PORT", "50052")
 
 	// Database config
-	cfg.Database.Host = getEnv("DB_HOST", "localhost")
-	cfg.Database.Port = getEnv("DB_PORT", "5432")
-	cfg.Database.User = getEnv("DB_USER", "postgres")
-	cfg.Database.Password = getEnv("DB_PASSWORD", "postgres")
-	cfg.Database.DBName = getEnv("DB_NAME", "rmshop")
-	cfg.Database.SSLMode = getEnv("DB_SSLMODE", "disable")
+	cfg.Database.Host = getEnvOrDefault("DB_HOST", "localhost")
+	cfg.Database.Port = getEnvOrDefault("DB_PORT", "5432")
+	cfg.Database.User = getEnvOrDefault("DB_USER", "postgres")
+	cfg.Database.Password = getEnvOrDefault("DB_PASSWORD", "postgres")
+	cfg.Database.DBName = getEnvOrDefault("DB_NAME", "rmshop")
+	cfg.Database.SSLMode = getEnvOrDefault("DB_SSLMODE", "disable")
 
 	return cfg, nil
 }
 
-func getEnv(key, defaultValue string) string {
+func getEnvOrDefault(key, defaultValue string) string {
 	if value := os.Getenv(key); value != "" {
 		return value
 	}

@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"log"
 
 	"github.com/mohamedfawas/rmshop-admin-service/internal/domain"
 	adminv1 "github.com/mohamedfawas/rmshop-proto/gen/v1/admin"
@@ -19,12 +20,14 @@ func NewAdminService(repo domain.AdminRepository) adminv1.AdminServiceServer {
 }
 
 func (s *adminService) GetUserDetails(ctx context.Context, req *adminv1.GetUserDetailsRequest) (*adminv1.GetUserDetailsResponse, error) {
+	// req is empty
 	if req.UserId == "" {
 		return nil, status.Error(codes.InvalidArgument, "user_id is required")
 	}
 
 	user, err := s.repo.GetUserDetails(ctx, req.UserId)
 	if err != nil {
+		log.Printf("failed to get user details from db : %v", err)
 		return nil, status.Errorf(codes.Internal, "failed to get user details: %v", err)
 	}
 

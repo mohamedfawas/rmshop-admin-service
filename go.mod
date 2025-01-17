@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/lib/pq v1.10.9
-	github.com/mohamedfawas/rmshop-proto v0.0.0-20250115221258-ce447a396e83
+	github.com/mohamedfawas/rmshop-proto v0.0.0-20250116061705-e8be5cca76ae
 	google.golang.org/grpc v1.69.4
 )
 
